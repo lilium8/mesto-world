@@ -1,0 +1,24 @@
+.profile__wrapper {
+  display: block;
+  position: relative;
+  margin-right: 3%;
+}
+
+.profile__wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(24,24,24,.6);
+  opacity: 0;
+  background-image: url(../../../images/avatarEdit.svg);  
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.profile__wrapper:hover:before,
+.profile__wrapper:hover:after { 
+  opacity: 1; 
+}
