@@ -1,8 +1,8 @@
 .profile__add-buttton {
   align-self: center;
   margin: 0 0 0 auto;
-  background-color: #181818;
-  border: 2px solid #fff;
+  background-color: #121212;
+  border: 2px solid rgba(255, 255, 255, 0.8);;
   background-image: url(../../../images/Vectoradd.svg);
   background-size: 15%;
   background-repeat: no-repeat;

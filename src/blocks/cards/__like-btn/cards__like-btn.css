@@ -11,3 +11,7 @@
   position: relative;
 }
 
+.cards__like-btn:hover {
+  transform: scale(1.2);
+}
+

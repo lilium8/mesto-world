@@ -1,19 +1,15 @@
-import {page} from "../components/index.js";
-
-/// Выбираем все модальные окна
+const page = document.querySelector('.main');
+//Select all modal windows
 const profilePopup = document.querySelector('#profilePopup');
 const placePopup = document.querySelector('#placePopup');
 const zoomPopup = document.querySelector('#zoomPopup');
 const avatarEditPopup = document.querySelector('#avatarEditPopup');
 const deleteCardPopup = document.querySelector('#deleteCard');
-/// Выбираем все кнопки по нажатию которых будут открываться определенные модальные окна
+//Select buttons to open specific modal windows
 const profileEditBtn = document.querySelector('.profile__edit-button');
 const placeAddBtn = document.querySelector('.profile__add-buttton');
 const avatarEditBtn = document.querySelector('#avatar__editBtn');
-const cardPhoto = document.querySelectorAll('.cards__photo');
-const deleteBtn = document.querySelector('.cards__delete-btn');
-
-//Выбираем элементы по нажатию которых модальные окна будут закрываться 
+//Select elements to close modal windows
 const profileEditCloseButton = document.querySelector('#profileCloseBtn');
 const placeCloseButton = document.querySelector('#placeCloseBtn');
 const zoomCloseBtn = document.querySelector('#zoomPopup-close');
@@ -21,14 +17,14 @@ const avatarCloseBtn = document.querySelector('#avatarCloseBtn');
 const deleteCardBtn = document.querySelector('#deleteCardBtn');
 
 
-/// Отслеживание событий: нажатие кноки Escape и клик по Overlay
+//Handle key events and close the modal window
 const keyHandler = (popup) => {
   page.addEventListener('keydown', evt => {
     if(evt.key === 'Escape') {
       popup.classList.remove('popup_opened');
     }
    });
-  
+
    page.addEventListener('click', evt => {
     if (evt.target === popup) {
       popup.classList.remove('popup_opened');
@@ -36,18 +32,18 @@ const keyHandler = (popup) => {
   });
 }
 
-/// Функция закрытия модального окна
+//to close a modal window
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
  }
 
- ///Функция открытия модального окна 
+ //to open a modal window 
  const openPopup = (popup) => {
   popup.classList.add('popup_opened')
   keyHandler(popup);
  }
 
-///Отслеживание кликов по кнопкам для открытия модальных окон
+//Event listeners to open modal windows
  profileEditBtn.addEventListener('click', function(){
   openPopup(profilePopup)
 });
@@ -60,8 +56,7 @@ avatarEditBtn.addEventListener('click', function(){
   openPopup(avatarEditPopup)
 });
 
-
-///Отслеживание кликов по кнопкам закрытия модальных окон
+//Event listeners to close modal windows
 profileEditCloseButton.addEventListener('click', function(){
   closePopup(profilePopup)
 });
@@ -82,15 +77,17 @@ deleteCardBtn.addEventListener('click', function(){
   closePopup(deleteCardPopup)
 })
 
-//Функция открытия модального окна по клику на фото карточки --- нифига не работает 
-cardPhoto.forEach(elem =>{
-  elem.addEventListener('click',()=>{
-    const photoCaption = document.querySelector('.popup__image-caption');
-    const zoomImg = document.querySelector('.popup__image');
-    openPopup(zoomPopup);
-    zoomImg.src = elem.src;
-    photoCaption.textContent = elem.alt
-  });
-})
+/// modal window for zoom image
+const zoomImg = (evt, card) => {
+  const photoCaption = document.querySelector('.popup__image-caption');
+  const zoomImg = document.querySelector('.popup__image');
+  const cardImg = card.querySelector('.cards__photo');
+  if(evt.target === cardImg) {
+    openPopup(zoomPopup)
+    zoomImg.src = cardImg.src;
+    photoCaption.textContent = cardImg.alt
+  }
+};
 
-export {openPopup, closePopup, profilePopup, deleteCardPopup}
+
+export {openPopup, closePopup, profilePopup, deleteCardPopup, zoomImg}

@@ -1,39 +1,61 @@
-import { getUserInfo, updateUserInfo  } from './api.js'
-import { closePopup, profilePopup } from './modal'
+import { updateUserInfo, editAvatar } from './api.js';
+import { closePopup, profilePopup } from './modal';
+import { renderResult } from './index.js';
 
-//Модальное окно редактирования профиля и его поля
 const profileForm = document.forms.profilePopup;
-const nameElement = document.querySelector('.profile__name'); 
+const avatarFrom = document.forms.avatarFrom;
+const profileAvatar = document.querySelector('.profile__avatar');
+const nameElement = document.querySelector('.profile__name');
 const jobElement = document.querySelector('.profile__description');
 
-
-///Рендер пользователя
+// Render user information on the page
 const renderUserInfo = (data) => {
-    const profileAvatar = document.querySelector('.profile__avatar');
-    nameElement.textContent = data.name;
-    jobElement.textContent = data.about;
-    profileAvatar.src = data.avatar;
-}
+  nameElement.textContent = data.name;
+  jobElement.textContent = data.about;
+  profileAvatar.src = data.avatar
+};
 
 
-
-
-///Вставка данных из ипута в разметку страницы
-const handleFormSubmit = evt => {
+// Handle form submission for updating user information
+const handleFormSubmit = (evt) => {
   evt.preventDefault();
-  const promise = updateUserInfo({
-    name: profileForm.elements.name.value,
-    about: profileForm.elements.job.value
-  });
-  promise.then(res => {
-    if (res.ok) {
-      nameElement.textContent = profileForm.elements.name.value;
-      jobElement.textContent = profileForm.elements.job.value;
-      closePopup(profilePopup);
-    }
-  })
-}
-profileForm.addEventListener('submit', handleFormSubmit)
+  //renderResult(true)///не работает
+  const name = profileForm.elements.name.value;
+  const about = profileForm.elements.job.value;
 
-export { renderUserInfo }
+  updateUserInfo({ name, about })
+    .then((res) => {
+        renderUserInfo(res);
+    })
+    .catch(err => console.log(`Ошибка ${err}`))
+
+    .finally(() => {
+      renderResult(false)
+    })// не работает
+    closePopup(profilePopup); 
+    profileForm.reset();
+};
+
+profileForm.addEventListener('submit', handleFormSubmit);
+
+// Handle form submission for avatar update
+const avatarFormSubmit = (evt) => {
+  evt.preventDefault();
+
+  const avatarInput = avatarFrom.elements.avatar;
+  const avatarUrl = avatarInput.value;
+  const profileAvatar = document.querySelector('.profile__avatar');
+
+  profileAvatar.src = avatarUrl;
+  closePopup(avatarEditPopup);
+  editAvatar(avatarUrl)
+    .then((data) => {
+      profileAvatar.src = data.avatar;
+    })
+    .catch(err => console.log(`Ошибка ${err}`))
+};
+
+avatarFrom.addEventListener('submit', avatarFormSubmit);
+
+export { renderUserInfo };
 

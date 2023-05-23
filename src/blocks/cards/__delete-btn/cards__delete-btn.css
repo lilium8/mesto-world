@@ -10,3 +10,7 @@
   left: 240px;
   opacity: .9;
 }
+
+.cards__delete-btn:hover {
+  transform: scale(1.5);
+}

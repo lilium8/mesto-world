@@ -3,8 +3,7 @@
   max-width: 880px;
   color: #fff;
   margin: 0 auto;
-  background: -webkit-linear-gradient(360deg, #121212,#181818);
-  background: linear-gradient(360deg, #121212,#181818);
+  background-color: #121212;
 }
 
 @media screen and (max-width: 1024px) {
