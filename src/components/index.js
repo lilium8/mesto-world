@@ -11,29 +11,20 @@ import { renderCards } from './card.js';
 import { renderUserInfo } from './user';
 
 const placeForm = document.forms.placeForm;
-const placeNameInput = placeForm.elements.placeName;
-const placeLinkInput = placeForm.elements.placeLink;
-const cardContainer = document.querySelector('.cards__list');
 const saveButton = document.querySelector('.popup__submit-btn');
-
 
 
 ///Функция добавления новых карточек 
 const addCard = evt => {
   evt.preventDefault();
 
-  const cardName = placeNameInput.value;
-  const cardLink = placeLinkInput.value;
-
-  const promise = sendCard({
-    name: cardName,
-    link: cardLink
-  });
-
-  promise.then(() => {
-    cardContainer.prepend(makeCard(cardLink,cardName));
+  sendCard({
+    name: placeForm.elements.placeName.value,
+    link: placeForm.elements.placeLink.value
   })
-
+  .then((res) => {
+    document.querySelector('.cards__list').prepend(makeCard(res.name,res.link));
+  })
   .catch(err => {
     console.log(`Ошибка: ${err}`);
   });
