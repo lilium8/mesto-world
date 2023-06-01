@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>MESTO</title>
+</head>
+<body class="main">
+  <header class="header">
+    <img src=<%=require("../src/images/mesto-world.svg")%> alt="логотип с надписью mesto russia" class="header__logo">
+  </header>
+  <main class="content">
+    <section class="profile">
+      <a href="#" class="profile__wrapper" id="avatar__editBtn">
+        <img class="profile__avatar" src=<%=require("../src/images/Jacques_Yves_Cousteau.jpg")%> alt="портрет Жака Ив Кусто в красной шапке на фоне моря">
+      </a>
+      <div class="profile__info">
+        <h1 class="profile__name"></h1>
+        <button class="profile__edit-button" type="button"></button>
+        <p class="profile__description"></p>
+      </div>
+      <button class="profile__add-buttton" type="button"></button>
+    </section>
+    <section class="cards">
+      <ul class="cards__list">
+      </ul>
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">&#169; 2023 Mesto World</p>
+  </footer>
+  <div class="popup" id="profilePopup">
+    <div class="popup__container">
+      <button class="popup__close-btn pointer" id="profileCloseBtn" type="button"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form" name="profilePopup">
+        <input class="popup__input" id="name" name="name" placeholder="Жак-Ив Кусто" type="text" minlength="2" maxlength="40" required>
+        <span class="popup__messageError name-error"></span>
+        <input class="popup__input" id="job" name="job" placeholder="Исследователь океана" type="text" minlength="4" maxlength="200" required>
+        <span class="popup__messageError job-error"></span>
+        <button class="popup__submit-btn popup__submit-btn_disabled pointer" id="profileSubmit" type="submit" disabled>Сохранить</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup" id="placePopup">
+    <div class="popup__container">
+      <button class="popup__close-btn pointer" id="placeCloseBtn" type="button"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form" name="placeForm">
+        <input class="popup__input" id="place" name="placeName" placeholder="Название" type="text" minlength="2" maxlength="40" required>
+        <span class="place-error popup__messageError"></span>
+        <input class="popup__input" id="placeURL" name="placeLink" placeholder="Ссылка на картинку" type="url" required>
+        <span class="placeURL-error popup__messageError"></span>
+        <button class="popup__submit-btn popup__submit-btn_disabled pointer" type="submit" disabled>Сохранить</button>
+      </form>
+    </div>
+  </div> 
+  <div class="popup" id="zoomPopup">
+     <div class="popup__zoom">
+      <button class="popup__close-btn popup__zoomClose-btn pointer" id="zoomPopup-close" type="button"></button>
+      <img class="popup__image" src="#" alt="" />
+      <p class="popup__image-caption"></p>
+    </div>
+  </div>
+  <div class="popup" id="avatarEditPopup">
+    <div class="popup__container" id="avatarPopup">
+      <button class="popup__close-btn pointer" id="avatarCloseBtn" type="button"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form class="popup__form" name="avatarFrom">
+        <input class="popup__input" id="avatar" name="avatarURL" placeholder="Ссылка на фото" type="url" required>
+        <span class="avatar-error popup__messageError"></span>
+        <button class="popup__submit-btn pointer" type="submit" disabled>Сохранить</button>
+      </form>
+    </div>
+  </div> 
+  <div class="popup" id="deleteCard">
+    <div class="popup__container">
+      <button class="popup__close-btn pointer" id="deleteCardBtn" type="button"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+      <form class="popup__form" name="deleteForm">
+        <button class="popup__submit-btn pointer" type="submit" id="submitDeleteBtn">Да</button>
+      </form>
+    </div>
+  </div> 
+  <template id="card_template">
+    <li class="cards__items">
+      <img src="" class="cards__photo" alt="">
+      <div class="cards__description">
+        <h2 class="cards__title"></h2>
+        <button class="cards__like-btn" type="button"></button><p class="cards__like-btn_counter">0</p>
+      </div>
+      <button class="cards__delete-btn pointer" type="button"></button>
+    </li>
+  </template>
+</body>
+</html>

@@ -1,0 +1,11 @@
+.cards__like-btn_counter {
+  color: #000;
+  width: 22px;
+  margin: 0;
+  position: absolute;
+  bottom: 9px;
+  right: 20px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+}

@@ -1,0 +1,7 @@
+.popup__zoom {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: #fff;
+}
