@@ -4,3 +4,9 @@
   font-weight: 400;
   color: #ff0000;
 }
+
+@media screen and (max-width: 700px) {
+  .popup__messageError {
+    font-size: 8px;
+  }
+}
